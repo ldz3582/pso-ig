@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HFSP 智能求解工作台</title>
+    <link rel="stylesheet" href="/static/styles.css?v=20260327-apple-redesign-v11" />
+  </head>
+  <body>
+    <div class="ambient ambient-a"></div>
+    <div class="ambient ambient-b"></div>
+    <div class="ambient ambient-c"></div>
+
+    <header class="layout-hub shell-card">
+      <div class="hub-primary">
+        <div class="brand-block">
+          <div class="window-dots" aria-hidden="true">
+            <span class="dot red"></span>
+            <span class="dot amber"></span>
+            <span class="dot green"></span>
+          </div>
+          <div class="brand-copy">
+            <p class="eyebrow">HFSP Workbench</p>
+            <h1>HFSP 智能求解工作台</h1>
+          </div>
+        </div>
+
+        <nav class="view-nav" aria-label="系统页面导航">
+          <button class="view-tab active" data-view="workspace">算例工作台</button>
+          <button class="view-tab" data-view="solver">求解中心</button>
+          <button class="view-tab" data-view="insights">结果分析</button>
+          <button class="view-tab" data-view="schedule">动态甘特图</button>
+          <button class="view-tab" data-view="simulation">仿真演示</button>
+          <button class="view-tab" data-view="staff">人员管理</button>
+        </nav>
+
+        <div class="hero-actions">
+          <button id="loadFirstBenchmarkBtn" class="ghost-btn">加载示例</button>
+          <button id="generateTemplateHeroBtn" class="primary-btn">生成模板</button>
+          <div id="userInfoArea" class="user-info-area" style="display:none;">
+            <span id="currentUserLabel" class="user-name-label"></span>
+            <button id="logoutBtn" class="ghost-btn" style="font-size:13px;padding:6px 12px;">退出</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hub-secondary">
+        <div class="command-copy">
+          <div class="command-heading">
+            <p id="pageEyebrow" class="section-tag">Workspace</p>
+            <h2 id="pageTitle" class="command-title">算例工作台</h2>
+          </div>
+          <p id="pageDescription" class="command-subcopy">
+            导入 benchmark、生成模板或直接编辑 JSON，先把求解输入准备好。
+          </p>
+        </div>
+
+        <div id="commandMetrics" class="command-metrics"></div>
+
+        <div class="command-actions">
+          <button id="goWorkspaceBtn" class="command-action active">输入</button>
+          <button id="goSolverBtn" class="command-action">求解</button>
+          <button id="goInsightsBtn" class="command-action">分析</button>
+          <button id="goScheduleBtn" class="command-action">甘特图</button>
+          <button id="goSimulationBtn" class="command-action">仿真</button>
+          <button id="goStaffBtn" class="command-action">人员</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="playback-hub shell-card">
+      <div class="timeline-panel">
+        <div class="playback-actions">
+          <button id="playPauseBtn" class="primary-btn">播放</button>
+          <button id="resetPlaybackBtn" class="ghost-btn">回到起点</button>
+          <div class="time-chip">
+            <span>当前时刻</span>
+            <strong id="currentTimeLabel">t = 0</strong>
+          </div>
+          <div class="time-chip wide-chip">
+            <span>当前事件</span>
+            <strong id="currentEventLabel">等待调度数据</strong>
+          </div>
+        </div>
+        <div class="playback-toolbar">
+          <label>
+            阶段
+            <select id="stageFilter"></select>
+          </label>
+          <label>
+            缩放
+            <input id="zoomRange" type="range" min="4" max="28" value="16" />
+          </label>
+          <label>
+            倍速
+            <select id="playbackSpeed">
+              <option value="0.5">0.5x</option>
+              <option value="1" selected>1x</option>
+              <option value="2">2x</option>
+              <option value="4">4x</option>
+              <option value="8">8x</option>
+            </select>
+          </label>
+        </div>
+        <div class="timeline-slider-wrap">
+          <input id="timeSlider" type="range" min="0" max="0" step="1" value="0" />
+        </div>
+        <div id="ganttMeta" class="gantt-meta">等待调度数据</div>
+        <div id="ganttLegend" class="gantt-legend">
+          <div class="legend-group">
+            <span class="legend-title">状态</span>
+            <span class="legend-item"><span class="legend-swatch active"></span>加工中</span>
+            <span class="legend-item"><span class="legend-swatch completed"></span>已完成</span>
+            <span class="legend-item"><span class="legend-swatch upcoming"></span>未开始</span>
+            <span class="legend-item"><span class="legend-swatch playhead"></span>当前时刻</span>
+          </div>
+          <div class="legend-group" id="ganttStageLegend">
+            <span class="legend-title">阶段颜色</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="view-stack">
+      <section class="view-page active" data-view-page="workspace">
+        <div class="workspace-layout split-layout" data-layout-key="workspace">
+          <section class="panel shell-card editor-panel resizable-card">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Instance Studio</p>
+                <h2>算例编辑</h2>
+              </div>
+              <span id="instanceValidity" class="status-pill neutral">待校验</span>
+            </div>
+
+            <div class="toolbar-row">
+              <div class="control-group grow">
+                <label for="benchmarkSelect">基准算例</label>
+                <div class="inline-form">
+                  <select id="benchmarkSelect"></select>
+                  <button id="loadBenchmarkBtn" class="soft-btn">加载</button>
+                </div>
+              </div>
+              <div class="control-group">
+                <label for="importFile">导入 JSON</label>
+                <input id="importFile" type="file" accept=".json,application/json" />
+              </div>
+            </div>
+
+            <div class="editor-stage">
+              <label for="instanceEditor">算例 JSON 编辑器</label>
+              <div class="editor-shell">
+                <div class="editor-shell-head">
+                  <div class="editor-dots" aria-hidden="true">
+                    <span class="editor-dot red"></span>
+                    <span class="editor-dot amber"></span>
+                    <span class="editor-dot green"></span>
+                  </div>
+                  <span class="editor-shell-title">instance.json</span>
+                  <span class="editor-shell-hint">HFSP schema</span>
+                </div>
+                <textarea id="instanceEditor" spellcheck="false"></textarea>
+              </div>
+            </div>
+
+            <div class="preview-card">
+              <div class="preview-head">
+                <p class="eyebrow">Preview</p>
+                <span class="preview-note">自动识别工件、阶段与机器结构</span>
+              </div>
+              <div id="instancePreview" class="preview-metrics"></div>
+            </div>
+          </section>
+
+          <div class="splitter splitter-vertical" data-splitter-key="workspace" aria-hidden="true"></div>
+
+          <aside class="workspace-side">
+            <section class="panel shell-card compact-panel resizable-card">
+              <div class="panel-head compact">
+                <div>
+                  <p class="eyebrow">Quick Builder</p>
+                  <h2>模板生成</h2>
+                </div>
+              </div>
+
+              <div class="builder-grid">
+                <div class="control-group">
+                  <label for="instanceName">实例名称</label>
+                  <input id="instanceName" type="text" value="custom_hfsp_case" />
+                </div>
+                <div class="control-group">
+                  <label for="nJobs">工件数</label>
+                  <input id="nJobs" type="number" min="1" value="6" />
+                </div>
+                <div class="control-group">
+                  <label for="nStages">阶段数</label>
+                  <input id="nStages" type="number" min="1" value="3" />
+                </div>
+                <div class="control-group">
+                  <label for="machinesPerStage">每阶段机器数</label>
+                  <input id="machinesPerStage" type="text" value="2,2,2" />
+                </div>
+              </div>
+
+              <div class="stack-actions">
+                <button id="generateTemplateBtn" class="soft-btn">生成模板</button>
+                <button id="formatJsonBtn" class="ghost-btn">格式化 JSON</button>
+              </div>
+            </section>
+
+            <section class="panel shell-card compact-panel panel-scroll resizable-card">
+              <div class="panel-head compact">
+                <div>
+                  <p class="eyebrow">Workflow</p>
+                  <h2>使用提示</h2>
+                </div>
+              </div>
+              <div class="guide-list">
+                <article class="guide-item">
+                  <span class="guide-step">01</span>
+                  <div>
+                    <strong>优先加载 benchmark</strong>
+                    <p>先确认求解链路和可视化流程正常，再替换成自定义算例。</p>
+                  </div>
+                </article>
+                <article class="guide-item">
+                  <span class="guide-step">02</span>
+                  <div>
+                    <strong>保持三维矩阵结构</strong>
+                    <p><code>processing_times</code> 使用 job -> stage -> machine 的层级组织。</p>
+                  </div>
+                </article>
+                <article class="guide-item">
+                  <span class="guide-step">03</span>
+                  <div>
+                    <strong>按顶部导航查看结果</strong>
+                    <p>求解后可分别进入分析、甘特图和仿真演示页面查看不同视角。</p>
+                  </div>
+                </article>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view-page" data-view-page="solver">
+        <div class="solver-layout split-layout" data-layout-key="solver">
+          <section class="panel shell-card panel-scroll resizable-card">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Solver Setup</p>
+                <h2>求解参数</h2>
+              </div>
+              <button id="solveBtn" class="primary-btn large">开始求解</button>
+            </div>
+
+            <div class="config-grid">
+              <label>
+                Solver Mode
+                <select id="solverMode">
+                  <option value="compare" selected>Compare Both</option>
+                  <option value="basic_pso_ig">Basic PSO + IG</option>
+                  <option value="multi_agent">Multi-Agent</option>
+                </select>
+              </label>
+              <label>Population<input id="populationSize" type="number" min="4" value="40" /></label>
+              <label>Generations<input id="maxGenerations" type="number" min="1" value="60" /></label>
+              <label>IG Iterations<input id="igIterations" type="number" min="1" value="20" /></label>
+              <label>Neighbors<input id="kNeighbors" type="number" min="1" value="3" /></label>
+              <label>Mutation<input id="mutationProbability" type="number" min="0" max="1" step="0.01" value="0.12" /></label>
+              <label>Destruction<input id="destructionRatio" type="number" min="0.05" max="0.9" step="0.05" value="0.3" /></label>
+              <label>Seed<input id="seedValue" type="number" value="20260326" /></label>
+              <label>Stagnation<input id="stagnationThreshold" type="number" min="1" value="10" /></label>
+            </div>
+          </section>
+
+          <div class="splitter splitter-vertical" data-splitter-key="solver" aria-hidden="true"></div>
+
+          <aside class="solver-side">
+            <section class="panel shell-card compact-panel resizable-card">
+              <div class="panel-head compact">
+                <div>
+                  <p class="eyebrow">Run Status</p>
+                  <h2>运行状态</h2>
+                </div>
+              </div>
+              <div class="status-board">
+                <div class="status-tile">
+                  <p>当前状态</p>
+                  <strong id="runStatus">空闲</strong>
+                </div>
+                <div class="status-tile">
+                  <p>最近耗时</p>
+                  <strong id="lastElapsed">-</strong>
+                </div>
+                <div class="status-tile">
+                  <p>档案规模</p>
+                  <strong id="lastArchiveSize">-</strong>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel shell-card panel-scroll resizable-card">
+              <div class="panel-head compact">
+                <div>
+                  <p class="eyebrow">Result Snapshot</p>
+                  <h2>结果摘要</h2>
+                </div>
+              </div>
+              <div id="summaryCards" class="summary-grid"></div>
+              <div id="modeResultSwitcher" class="mode-switcher"></div>
+            </section>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view-page" data-view-page="insights">
+        <div class="insights-layout split-layout" data-layout-key="insights">
+          <section class="panel shell-card analysis-panel resizable-card">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Performance View</p>
+                <h2>结果分析</h2>
+              </div>
+              <div id="headlineBadge" class="headline-badge">等待求解结果</div>
+            </div>
+            <div id="analysisBoard" class="analysis-board empty-state">
+              求解完成后，这里将展示瓶颈阶段、设备利用率、等待时间与基线改进。
+            </div>
+          </section>
+
+          <div class="splitter splitter-vertical" data-splitter-key="insights" aria-hidden="true"></div>
+
+          <section class="panel shell-card archive-panel resizable-card">
+            <div class="panel-head compact">
+              <div>
+                <p class="eyebrow">Multimodal Archive</p>
+                <h2>多解档案</h2>
+              </div>
+            </div>
+            <div id="archiveContainer" class="archive-grid empty-state">档案库尚未生成。</div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view-page" data-view-page="schedule">
+        <section class="panel shell-card schedule-panel resizable-card">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Dynamic Schedule</p>
+              <h2>动态甘特图</h2>
+            </div>
+          </div>
+
+          <div class="gantt-live-layout">
+            <div id="ganttContainer" class="gantt-shell empty-state">
+              求解后会在这里展示机器级时间轴与动态调度过程。
+            </div>
+            <aside class="realtime-panel">
+              <article class="realtime-card resizable-card">
+                <p class="eyebrow">Realtime Summary</p>
+                <div id="realtimeSummary" class="realtime-summary empty-state compact-empty">暂无状态数据</div>
+              </article>
+              <article class="realtime-card resizable-card">
+                <p class="eyebrow">Machine Status</p>
+                <div id="machineStatusList" class="status-list empty-state compact-empty">等待调度数据</div>
+              </article>
+              <article class="realtime-card resizable-card">
+                <p class="eyebrow">Job Status</p>
+                <div id="jobStatusList" class="status-list empty-state compact-empty">等待调度数据</div>
+              </article>
+            </aside>
+          </div>
+        </section>
+      </section>
+
+      <section class="view-page" data-view-page="simulation">
+        <section class="panel shell-card schedule-panel resizable-card">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Simulation Playback</p>
+              <h2>车间仿真演示</h2>
+            </div>
+          </div>
+
+          <section class="simulation-shell simulation-page-shell">
+            <div class="simulation-head">
+              <div>
+                <p class="eyebrow">Shop Floor View</p>
+                <h3>工件流转仿真</h3>
+              </div>
+              <div id="simulationSummary" class="simulation-summary">等待调度数据</div>
+            </div>
+            <div id="simulationScene" class="simulation-scene empty-state">
+              求解后将在这里展示工件在各阶段与机器间流转的仿真动画。
+            </div>
+          </section>
+        </section>
+      </section>
+      <section class="view-page" data-view-page="staff">
+        <div class="staff-layout split-layout" data-layout-key="staff">
+          <section class="panel shell-card resizable-card panel-scroll">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Staff Management</p>
+                <h2>人员管理</h2>
+              </div>
+              <button id="addStaffBtn" class="primary-btn">添加人员</button>
+            </div>
+
+            <div id="staffStatsBar" class="staff-stats-bar"></div>
+
+            <div class="staff-search-row">
+              <input id="staffSearchInput" type="text" placeholder="搜索姓名或工号..." />
+            </div>
+
+            <div id="staffListContainer" class="staff-list-container">
+              <div class="empty-state">暂无人员数据</div>
+            </div>
+          </section>
+
+          <div class="splitter splitter-vertical" data-splitter-key="staff" aria-hidden="true"></div>
+
+          <aside class="staff-detail-side">
+            <section class="panel shell-card resizable-card">
+              <div class="panel-head compact">
+                <div>
+                  <p class="eyebrow">Staff Detail</p>
+                  <h2 id="staffDetailTitle">人员详情</h2>
+                </div>
+              </div>
+              <div id="staffDetailContent" class="staff-detail-content">
+                <div class="empty-state compact-empty">请在左侧选择人员查看详情</div>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <template id="summaryCardTemplate">
+      <article class="summary-card">
+        <p class="summary-label"></p>
+        <strong class="summary-value"></strong>
+        <span class="summary-note"></span>
+      </article>
+    </template>
+
+    <div id="toastRack" class="toast-rack" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="/static/app.js?v=20260327-apple-redesign-v11"></script>
+  </body>
+</html>

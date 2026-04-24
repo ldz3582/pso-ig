@@ -1,0 +1,89 @@
+{
+  "name": "Carlier_small",
+  "n_jobs": 5,
+  "n_stages": 3,
+  "machines_per_stage": [
+    2,
+    2,
+    2
+  ],
+  "processing_times": [
+    [
+      [
+        11,
+        8
+      ],
+      [
+        15,
+        12
+      ],
+      [
+        9,
+        11
+      ]
+    ],
+    [
+      [
+        14,
+        7
+      ],
+      [
+        11,
+        15
+      ],
+      [
+        15,
+        12
+      ]
+    ],
+    [
+      [
+        9,
+        8
+      ],
+      [
+        12,
+        12
+      ],
+      [
+        7,
+        10
+      ]
+    ],
+    [
+      [
+        9,
+        6
+      ],
+      [
+        12,
+        10
+      ],
+      [
+        6,
+        9
+      ]
+    ],
+    [
+      [
+        5,
+        14
+      ],
+      [
+        10,
+        13
+      ],
+      [
+        5,
+        15
+      ]
+    ]
+  ],
+  "total_machines": 6,
+  "total_operations": 15,
+  "generation_method": "random",
+  "processing_time_range": [
+    5,
+    15
+  ]
+}

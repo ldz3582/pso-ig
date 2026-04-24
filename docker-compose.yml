@@ -1,0 +1,16 @@
+services:
+  hfsp-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hfsp-web
+    ports:
+      - "8000:8000"
+    environment:
+      HFSP_HOST: 0.0.0.0
+      HFSP_PORT: 8000
+    volumes:
+      - ./benchmarks:/app/benchmarks:ro
+      - ./output:/app/output
+      - ./results:/app/results
+    restart: unless-stopped
