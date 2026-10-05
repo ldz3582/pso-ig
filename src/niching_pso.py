@@ -92,6 +92,15 @@ class NichingPSO:
         self.stagnation_detector = StagnationDetector(stagnation_threshold)
         self.ig_algorithm: IteratedGreedy | None = None
         self.multimodal_solutions: list[dict[str, object]] = []
+        # 档案库引导（archive-guided）开关：pool 为档案库排列的实时引用，
+        # 停滞重初始化 / 初期建群时可从中直接注入精英方案，避免纯随机重启。
+        self.diversity_pool: list[list[int]] | None = None
+        self.pool_seed_fraction: float = 0.3
+        self.injection_probability: float = 0.5
+        # 候选解缓冲：只做「排列精确去重 + 容量裁剪」，真正的结构去重与质量门限
+        # 交给 MultimodalArchive 判定，避免在这里用位置距离误杀结构不同的解。
+        self.multimodal_capacity: int = 200
+        self._seen_positions: set[tuple[int, ...]] = set()
 
     def set_ig_algorithm(self, algorithm: IteratedGreedy) -> None:
         self.ig_algorithm = algorithm
@@ -176,28 +185,21 @@ class NichingPSO:
         return candidate
 
     def _record_solution(self, evaluation: ScheduleEvaluation) -> None:
-        candidate = {
-            "permutation": list(evaluation.permutation),
-            "makespan": evaluation.makespan,
-            "machine_assignments": [list(row) for row in evaluation.machine_assignments],
-        }
-
-        for existing in self.multimodal_solutions:
-            gap = abs(existing["makespan"] - candidate["makespan"]) / max(
-                1, existing["makespan"]
-            )
-            permutation_distance = self.distance_calculator.permutation_distance(
-                existing["permutation"], candidate["permutation"]
-            )
-            machine_distance = self.distance_calculator.machine_assignment_distance(
-                existing["machine_assignments"], candidate["machine_assignments"]
-            )
-            if gap <= 0.01 and permutation_distance <= 2 and machine_distance <= 1:
-                return
-
-        self.multimodal_solutions.append(candidate)
+        """把候选解放进缓冲池（结构去重与质量门限由 MultimodalArchive 负责）。"""
+        key = tuple(evaluation.permutation)
+        if key in self._seen_positions:
+            return
+        self._seen_positions.add(key)
+        self.multimodal_solutions.append(
+            {
+                "permutation": list(evaluation.permutation),
+                "makespan": evaluation.makespan,
+                "machine_assignments": [list(row) for row in evaluation.machine_assignments],
+            }
+        )
         self.multimodal_solutions.sort(key=lambda item: item["makespan"])
-        self.multimodal_solutions = self.multimodal_solutions[:25]
+        if len(self.multimodal_solutions) > self.multimodal_capacity:
+            self.multimodal_solutions = self.multimodal_solutions[: self.multimodal_capacity]
 
     def _initialize_population(self) -> list[Particle]:
         population: list[Particle] = []
@@ -220,6 +222,15 @@ class NichingPSO:
         while len(population) < min(self.population_size, 10):
             seeded = self._mutate(spt.permutation, strength=max(1, self.env.n_jobs // 5))
             evaluation = self._evaluate(seeded)
+            population.append(Particle.from_evaluation(evaluation))
+            self._record_solution(evaluation)
+
+        pool = self.diversity_pool or []
+        pool_quota = min(len(pool), int(self.population_size * self.pool_seed_fraction))
+        for offset in range(pool_quota):
+            if len(population) >= self.population_size:
+                break
+            evaluation = self._evaluate(list(pool[offset]))
             population.append(Particle.from_evaluation(evaluation))
             self._record_solution(evaluation)
 
@@ -268,7 +279,11 @@ class NichingPSO:
                 break
             if tuple(population[index].position) == tuple(protected_permutation):
                 continue
-            permutation = self.env.generate_initial_solution("random", rng=self.rng)
+            pool = self.diversity_pool or []
+            if pool and self.rng.random() < self.injection_probability:
+                permutation = list(self.rng.choice(pool))
+            else:
+                permutation = self.env.generate_initial_solution("random", rng=self.rng)
             evaluation = self._evaluate(permutation)
             population[index] = Particle.from_evaluation(evaluation)
             self._record_solution(evaluation)

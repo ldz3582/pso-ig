@@ -1,0 +1,474 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2160 1480" width="2160" height="1480">
+<defs>
+
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#475569" />
+        </marker>
+        <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#3A82E4" />
+        </marker>
+        <marker id="arrow-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#E67A1E" />
+        </marker>
+        <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#9C56B8" />
+        </marker>
+        <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#27AE60" />
+        </marker>
+        <filter id="shadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.06"/>
+        </filter>
+        <style>
+            .title-main { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; font-weight: 800; font-size: 28px; fill: #0F172A; }
+            .title-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; font-weight: 500; font-size: 14px; fill: #475569; }
+            .col-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; font-weight: 800; font-size: 16px; }
+            .sec-tag { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; font-weight: 700; font-size: 11px; }
+            .box-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; font-weight: 700; font-size: 13px; }
+            .box-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; font-weight: 400; font-size: 11.5px; line-height: 1.45; }
+            .lbl-branch { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; font-size: 11px; font-weight: 600; fill: #334155; }
+        </style>
+    
+</defs>
+<rect width="2160" height="1480" fill="#FBF9F1" />
+
+    <g transform="translate(0, 36)">
+        <text x="1080.0" y="0" text-anchor="middle" class="title-main">HFSP 混合流水车间调度求解系统 · 核心架构与算法求解全流程图</text>
+        <text x="1080.0" y="27" text-anchor="middle" class="title-sub">涵盖系统四层核心架构、商集空间 Π/~ 理论、小生境离散 PSO、退火 IG、三种求解模式 (basic / multi_agent / compare) 与档案四步准入引导闭环</text>
+    </g>
+    
+
+        <g transform="translate(45, 80)">
+            <rect width="485" height="46" rx="6" fill="#EBF3FC" stroke="#3A82E4" stroke-width="1.3" filter="url(#shadow)"/>
+            <text x="242.5" y="19" text-anchor="middle" class="box-title" fill="#1A365D">① L0 基础设施与评测核</text>
+            <text x="242.5" y="34" text-anchor="middle" class="box-body" fill="#1A365D" opacity="0.85">hfsp_environment.py · schedule_distance.py (ECT 解码与商集理论)</text>
+        </g>
+        
+<line x1="530" y1="103.0" x2="556" y2="103.0" stroke="#475569" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+        <g transform="translate(556, 80)">
+            <rect width="485" height="46" rx="6" fill="#FDF2E4" stroke="#E67A1E" stroke-width="1.3" filter="url(#shadow)"/>
+            <text x="242.5" y="19" text-anchor="middle" class="box-title" fill="#7C2D12">② L1/L2 混合搜索算子</text>
+            <text x="242.5" y="34" text-anchor="middle" class="box-body" fill="#7C2D12" opacity="0.85">niching_pso.py · iterated_greedy.py (小生境离散 PSO + 退火 IG)</text>
+        </g>
+        
+<line x1="1041" y1="103.0" x2="1067" y2="103.0" stroke="#475569" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+        <g transform="translate(1067, 80)">
+            <rect width="485" height="46" rx="6" fill="#E6FFFA" stroke="#0D9488" stroke-width="1.3" filter="url(#shadow)"/>
+            <text x="242.5" y="19" text-anchor="middle" class="box-title" fill="#115E59">③ L3 求解器核心与协同</text>
+            <text x="242.5" y="34" text-anchor="middle" class="box-body" fill="#115E59" opacity="0.85">multimodal_hfsp_solver.py (basic_pso_ig / multi_agent / compare)</text>
+        </g>
+        
+<line x1="1552" y1="103.0" x2="1578" y2="103.0" stroke="#475569" stroke-width="1.4" marker-end="url(#arrow)"/>
+
+        <g transform="translate(1578, 80)">
+            <rect width="485" height="46" rx="6" fill="#F5EEF8" stroke="#9C56B8" stroke-width="1.3" filter="url(#shadow)"/>
+            <text x="242.5" y="19" text-anchor="middle" class="box-title" fill="#4A154B">④ L2/L3 档案准入与引导</text>
+            <text x="242.5" y="34" text-anchor="middle" class="box-body" fill="#4A154B" opacity="0.85">multimodal_archive.py · archive_guided_search.py (四步准入与引导闭环)</text>
+        </g>
+        
+
+        <g transform="translate(45, 145)">
+            <rect width="475" height="1240" rx="10" fill="rgba(255, 255, 255, 0.94)" stroke="#CBD5E1" stroke-width="1.4" stroke-dasharray="5,4"/>
+            <text x="16" y="25" class="col-title" fill="#1E40AF">① 建模、工件排列编码与商集理论 (L0)</text>
+        </g>
+        
+
+        <g transform="translate(548, 145)">
+            <rect width="535" height="1240" rx="10" fill="rgba(255, 255, 255, 0.94)" stroke="#CBD5E1" stroke-width="1.4" stroke-dasharray="5,4"/>
+            <text x="16" y="25" class="col-title" fill="#C2410C">② 小生境 PSO 与 IG 深度优化 (L1/L2)</text>
+        </g>
+        
+
+        <g transform="translate(1111, 145)">
+            <rect width="475" height="1240" rx="10" fill="rgba(255, 255, 255, 0.94)" stroke="#CBD5E1" stroke-width="1.4" stroke-dasharray="5,4"/>
+            <text x="16" y="25" class="col-title" fill="#0F766E">③ 求解模式分派与多智能体协同 (L3)</text>
+        </g>
+        
+
+        <g transform="translate(1614, 145)">
+            <rect width="501" height="1240" rx="10" fill="rgba(255, 255, 255, 0.94)" stroke="#CBD5E1" stroke-width="1.4" stroke-dasharray="5,4"/>
+            <text x="16" y="25" class="col-title" fill="#7E22CE">④ 多模态档案准入与引导闭环 (L2/L3)</text>
+        </g>
+        
+<g transform="translate(59, 190)">
+<rect width="447" height="105" rx="7" fill="#EBF3FC" stroke="#3A82E4" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="58" height="17" rx="3.5" fill="#3A82E4" fill-opacity="0.15"/>
+<text x="37" y="19" text-anchor="middle" class="sec-tag" fill="#3A82E4">1.1 输入</text>
+<text x="74" y="20" class="box-title" fill="#1A365D">算例输入与车间建模 (hfsp_environment.py)</text>
+<text x="12" y="38" class="box-body" fill="#1A365D" font-weight="700">• 支持 Carlier 96 例 / Small / Big TXT 基准算例</text>
+<text x="12" y="53.5" class="box-body" fill="#1A365D" font-weight="700">• 车间拓扑参数: 工件数 n, 阶段数 s, 各阶段机器数 m_s</text>
+<text x="12" y="69.0" class="box-body" fill="#1A365D" font-weight="700">• 三维加工工时张量: P[job][stage][machine]</text>
+<text x="12" y="84.5" class="box-body" fill="#1A365D" font-weight="700">• 统一校验工件唯一性、无等待/拓扑有效性</text>
+<text x="12" y="100.0" class="box-body" fill="#1A365D" font-weight="700">• 封装为不可变强类型对象 HFSPEnvironment</text>
+</g>
+<g transform="translate(59, 310)">
+<rect width="447" height="170" rx="7" fill="#FEF3C7" stroke="#D97706" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="58" height="17" rx="3.5" fill="#D97706" fill-opacity="0.15"/>
+<text x="37" y="19" text-anchor="middle" class="sec-tag" fill="#D97706">1.2 编码</text>
+<text x="74" y="20" class="box-title" fill="#78350F">离散工件排列编码设计 (Permutation Encoding)</text>
+<text x="12" y="38" class="box-body" fill="#78350F" font-weight="700">• 编码向量表示: π = (π₀, π₁, ..., π_{n-1}) ∈ Π (解空间)</text>
+<text x="18" y="53.5" class="box-body" fill="#78350F">  - 长度为工件总数 n，元素 πᵢ ∈ {0, ..., n-1} 且无重复</text>
+<text x="12" y="69.0" class="box-body" fill="#78350F" font-weight="700">• 物理语义: 决定工件在阶段 0 的加工优先级与冲突仲裁权</text>
+<text x="12" y="84.5" class="box-body" fill="#78350F" font-weight="700">• PSO 算法中的双重离散编码映射:</text>
+<text x="18" y="100.0" class="box-body" fill="#78350F">  - 粒子位置 Xᵢ: 工件全排列 πᵢ (对应可行调度空间)</text>
+<text x="18" y="115.5" class="box-body" fill="#78350F">  - 粒子速度 Vᵢ: 离散对换操作序列 SwapSeq = (op₁, op₂, ...)</text>
+<text x="12" y="131.0" class="box-body" fill="#78350F" font-weight="700">• 间接编码优势 (为什么不把机器分配编码进染色体?):</text>
+<text x="18" y="146.5" class="box-body" fill="#78350F">  - 消除 n! × ∏(mₛⁿ) 巨量不可行解与排队死锁，100% 结构合法</text>
+<text x="18" y="162.0" class="box-body" fill="#78350F">  - 将极其复杂的机器分配交由 ECT 启发式规则即时最优决策</text>
+</g>
+<g transform="translate(59, 495)">
+<rect width="447" height="165" rx="7" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="58" height="17" rx="3.5" fill="#16A34A" fill-opacity="0.15"/>
+<text x="37" y="19" text-anchor="middle" class="sec-tag" fill="#16A34A">1.3 解码</text>
+<text x="74" y="20" class="box-title" fill="#145A32">确定性唯一解码映射核 D: Π → S (ECT 规则)</text>
+<text x="12" y="38" class="box-body" fill="#145A32" font-weight="700">• 阶段拓扑推进: stage = 0 → s-1 顺序流水作业</text>
+<text x="12" y="53.5" class="box-body" fill="#145A32" font-weight="700">• 阶段内严格按工件排列 π 的先后顺序依次入场派工</text>
+<text x="12" y="69.0" class="box-body" fill="#145A32" font-weight="700">• Earliest Completion Time (最早完工机器选择):</text>
+<text x="24" y="84.5" class="box-body" fill="#145A32" opacity="0.9">  C[j,s,m] = max(MachineReady, JobDone) + p[j,s,m]</text>
+<text x="12" y="100.0" class="box-body" fill="#145A32" font-weight="700">• 内置 LRU 评估缓存，消除相同排列重复计算</text>
+<text x="12" y="115.5" class="box-body" fill="#145A32" font-weight="700">• 输出不可变 ScheduleEvaluation: 包含 makespan、完工时间、</text>
+<text x="24" y="131.0" class="box-body" fill="#145A32" opacity="0.9">  各阶段机器分配阵列与逐工序明细 operations</text>
+</g>
+<g transform="translate(59, 675)">
+<rect width="447" height="125" rx="7" fill="#FDF2E4" stroke="#E67A1E" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="58" height="17" rx="3.5" fill="#E67A1E" fill-opacity="0.15"/>
+<text x="37" y="19" text-anchor="middle" class="sec-tag" fill="#E67A1E">1.4 基线</text>
+<text x="74" y="20" class="box-title" fill="#7C2D12">启发式基准计算 (NEH / SPT 基线)</text>
+<text x="12" y="38" class="box-body" fill="#7C2D12" font-weight="700">• NEH 启发式 (高水准基准与初始全局下界):</text>
+<text x="18" y="53.5" class="box-body" fill="#7C2D12">  - 各工件在各阶段平均加工工时降序排序</text>
+<text x="18" y="69.0" class="box-body" fill="#7C2D12">  - 逐个工件在当前序列中穷举贪心最优插入</text>
+<text x="12" y="84.5" class="box-body" fill="#7C2D12" font-weight="700">• SPT 启发式 (短工时优先，经典工程基线):</text>
+<text x="18" y="100.0" class="box-body" fill="#7C2D12">  - 按工件平均加工时间升序直接调用 D(π) 解码</text>
+<text x="12" y="115.5" class="box-body" fill="#7C2D12" font-weight="700">• 产出高质量探索种子与对照基底</text>
+</g>
+<g transform="translate(59, 815)">
+<rect width="447" height="250" rx="7" fill="#E6FFFA" stroke="#0D9488" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="58" height="17" rx="3.5" fill="#0D9488" fill-opacity="0.15"/>
+<text x="37" y="19" text-anchor="middle" class="sec-tag" fill="#0D9488">1.5 商集</text>
+<text x="74" y="20" class="box-title" fill="#115E59">商集理论 Π/~ 与正交结构距离 (schedule_distance.py)</text>
+<text x="12" y="38" class="box-body" fill="#115E59" font-weight="700">• 核心公理: 排列编码空间与物理调度空间是多对一映射</text>
+<text x="24" y="53.5" class="box-body" fill="#115E59" opacity="0.9">  不同排列解码后在机器上的顺序完全相同 (等价类)</text>
+<text x="24" y="69.0" class="box-body" fill="#115E59" opacity="0.9">  结构等价关系: π₁ ~ π₂ ⟺ D(π₁) = D(π₂)</text>
+<text x="12" y="84.5" class="box-body" fill="#115E59" font-weight="700">• 结构签名 Sig(π)={ (阶段, 机器): 工件加工顺序 }</text>
+<text x="12" y="100.0" class="box-body" fill="#115E59" font-weight="700">• 两大正交归一化结构距离 (∈ [0, 1]):</text>
+<text x="18" y="115.5" class="box-body" fill="#115E59">  - 机器分配距离 D_assign: 分配到不同机器的对占比</text>
+<text x="18" y="131.0" class="box-body" fill="#115E59">  - 加工顺序距离 D_seq: 相同机器上先后颠倒的 Kendall-τ 比例</text>
+<text x="12" y="146.5" class="box-body" fill="#115E59" font-weight="700">• 向量化矩阵加速: ScheduleFeatures 批量广播，</text>
+<text x="24" y="162.0" class="box-body" fill="#115E59" opacity="0.9">  将 O(m²) 距离调用耗时从 20 分钟骤降至 16 秒！</text>
+</g>
+<g transform="translate(59, 1080)">
+<rect width="447" height="135" rx="7" fill="#EBF3FC" stroke="#3A82E4" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="58" height="17" rx="3.5" fill="#3A82E4" fill-opacity="0.15"/>
+<text x="37" y="19" text-anchor="middle" class="sec-tag" fill="#3A82E4">1.6 机理</text>
+<text x="74" y="20" class="box-title" fill="#1A365D">商集空间映射机理 (为什么排列编码 ≠ 最终调度)</text>
+<text x="12" y="38" class="box-body" fill="#1A365D" font-weight="700">• 排列编码空间 Π: [π₁, π₂, π₃] 具有不同位置海明距离</text>
+<text x="12" y="53.5" class="box-body" fill="#1A365D" font-weight="700">• 经过 ECT 解码核映射到商集空间 Π/~:</text>
+<text x="24" y="69.0" class="box-body" fill="#1A365D" opacity="0.9">  D(π₁) = D(π₂) = D(π₃) ⟹ 归入同一【物理调度 A】</text>
+<text x="12" y="84.5" class="box-body" fill="#1A365D" font-weight="700">• 档案库判定原则: 同一调度只保留一个代表元！</text>
+<text x="12" y="100.0" class="box-body" fill="#1A365D" font-weight="700">• 结构互异且完工期均最优的调度 ⟹ 真正的多模态等优解！</text>
+</g>
+<line x1="282.5" y1="295" x2="282.5" y2="310" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="282.5" y1="480" x2="282.5" y2="495" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="282.5" y1="660" x2="282.5" y2="675" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="282.5" y1="800" x2="282.5" y2="815" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="282.5" y1="1065" x2="282.5" y2="1080" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+<g transform="translate(562, 190)">
+<rect width="507" height="160" rx="7" fill="#EBF3FC" stroke="#3A82E4" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="58" height="17" rx="3.5" fill="#3A82E4" fill-opacity="0.15"/>
+<text x="37" y="19" text-anchor="middle" class="sec-tag" fill="#3A82E4">2.1 建群</text>
+<text x="74" y="20" class="box-title" fill="#1A365D">初始化多梯队种群 (N=40) 与进入候选缓冲</text>
+<text x="12" y="38" class="box-body" fill="#1A365D" font-weight="700">• 种群规模 N=40，逐个评估后进入候选缓冲池:</text>
+<text x="18" y="53.5" class="box-body" fill="#1A365D">  - 梯队1: 1 个 NEH 确定性解 (高质量全局锚点)</text>
+<text x="18" y="69.0" class="box-body" fill="#1A365D">  - 梯队2: 1 个 SPT 确定性解 (异构工程启发基线)</text>
+<text x="18" y="84.5" class="box-body" fill="#1A365D">  - 梯队3: 4 个 NEH 邻域扰动解 (小强度交换对, 扩至 6 个)</text>
+<text x="18" y="100.0" class="box-body" fill="#1A365D">  - 梯队4: 4 个 SPT 邻域扰动解 (适度扰动对, 扩至 10 个)</text>
+<text x="18" y="115.5" class="box-body" fill="#1A365D">  - 梯队5: (若引导重启) 注入档案库精英解 pool (quota ≤ 30%)</text>
+<text x="18" y="131.0" class="box-body" fill="#1A365D">  - 梯队6: 约 30 个全随机排列补齐 N=40，保障全空间分散度</text>
+<text x="12" y="146.5" class="box-body" fill="#1A365D" font-weight="700">• 候选缓冲: seen_positions 查重，未见新排列写入缓冲池</text>
+</g>
+<g transform="translate(562, 375)">
+<rect width="507" height="135" rx="7" fill="#EBF3FC" stroke="#3A82E4" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="58" height="17" rx="3.5" fill="#3A82E4" fill-opacity="0.15"/>
+<text x="37" y="19" text-anchor="middle" class="sec-tag" fill="#3A82E4">2.2 控制</text>
+<text x="74" y="20" class="box-title" fill="#1A365D">自适应惯性权重、环形邻域与变异率控制</text>
+<text x="12" y="38" class="box-body" fill="#1A365D" font-weight="700">• 惯性权重线性递减: w(t) = 0.9 - 0.5 × (t / (T-1))</text>
+<text x="18" y="53.5" class="box-body" fill="#1A365D">  - 前期 w ≈ 0.9 保持动量全局探索; 后期 w ≈ 0.4 局部聚焦收敛</text>
+<text x="12" y="69.0" class="box-body" fill="#1A365D" font-weight="700">• 环形拓扑 (Ring): 粒子仅与左右 k=3 个邻居通信</text>
+<text x="12" y="84.5" class="box-body" fill="#1A365D" font-weight="700">• 小生境聚类 (Niching): 排列距离 ≤ 3 划入同生境，获取局部最优 lbest</text>
+<text x="12" y="100.0" class="box-body" fill="#1A365D" font-weight="700">• 自适应变异率: P_mut = min(0.45, 0.08 + 多样性增益 + 停滞增益)</text>
+<text x="18" y="115.5" class="box-body" fill="#1A365D">  - 种群拥挤 (Diversity &lt; 0.25) 或停滞时，变异率自动补偿放大</text>
+</g>
+<g transform="translate(562, 535)">
+<rect width="507" height="140" rx="7" fill="#EBF3FC" stroke="#3A82E4" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="58" height="17" rx="3.5" fill="#3A82E4" fill-opacity="0.15"/>
+<text x="37" y="19" text-anchor="middle" class="sec-tag" fill="#3A82E4">2.3 推进</text>
+<text x="74" y="20" class="box-title" fill="#1A365D">局部引导交换序、速度与位置更新 (防单峰塌陷)</text>
+<text x="12" y="38" class="box-body" fill="#1A365D" font-weight="700">• 构造认知 / 社会离散速度 (交换序列 SwapSeq):</text>
+<text x="18" y="53.5" class="box-body" fill="#1A365D">  - 认知分量: 抽取变至个体历史最优的交换对 SwapSeq(x, pbest)</text>
+<text x="18" y="69.0" class="box-body" fill="#1A365D">  - 社会分量: 抽取变至同生境局部最优的 SwapSeq(x, lbest)</text>
+<text x="18" y="84.5" class="box-body" fill="#1A365D">  - 用意: 追随局部最优 lbest 促成多峰并行开采，避免全群陷入单一伪极值</text>
+<text x="12" y="100.0" class="box-body" fill="#1A365D" font-weight="700">• 速度公式: V = w⊙V ⊕ c₁⊙Sample(pbest) ⊕ c₂⊙Sample(lbest)</text>
+<text x="12" y="115.5" class="box-body" fill="#1A365D" font-weight="700">• 施加位置交换: 依次实施交换对; 依 P_mut 施加随机换位变异</text>
+</g>
+<g transform="translate(562, 700)">
+<rect width="507" height="125" rx="7" fill="#EBF3FC" stroke="#3A82E4" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="58" height="17" rx="3.5" fill="#3A82E4" fill-opacity="0.15"/>
+<text x="37" y="19" text-anchor="middle" class="sec-tag" fill="#3A82E4">2.4 缓冲</text>
+<text x="74" y="20" class="box-title" fill="#1A365D">解码评价新粒子、更新最优与候选缓冲 (步步留痕)</text>
+<text x="12" y="38" class="box-body" fill="#1A365D" font-weight="700">• 统一调用 D(x) 解码，计算当前 makespan 与工序机器分配</text>
+<text x="12" y="53.5" class="box-body" fill="#1A365D" font-weight="700">• 更新粒子个体历史最优 pbest 与当前代全局最优 gbest</text>
+<text x="12" y="69.0" class="box-body" fill="#1A365D" font-weight="700">• 候选缓冲深层用意 (步步留痕):</text>
+<text x="18" y="84.5" class="box-body" fill="#1A365D">  - 粒子飞行中只要踩到未见过的排列即记录入池，升序维护前 200 名</text>
+<text x="18" y="100.0" class="box-body" fill="#1A365D">  - 截断丢弃 200 名之后劣解; 保证粒子飞行轨迹中沿途发现的</text>
+<text x="24" y="115.5" class="box-body" fill="#1A365D" opacity="0.9">    大量优质多模态方案被实时留存，为最终档案库留足种子</text>
+</g>
+<g transform="translate(562, 850)">
+<rect width="507" height="150" rx="7" fill="#FDF2E4" stroke="#E67A1E" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="58" height="17" rx="3.5" fill="#E67A1E" fill-opacity="0.15"/>
+<text x="37" y="19" text-anchor="middle" class="sec-tag" fill="#E67A1E">2.5 精修</text>
+<text x="74" y="20" class="box-title" fill="#7C2D12">周期执行 IG 精修与停滞多样性重初始化</text>
+<text x="12" y="38" class="box-body" fill="#7C2D12" font-weight="700">• 周期性 IG 嵌入 (每隔 T/5 = 12 代固定触发):</text>
+<text x="18" y="53.5" class="box-body" fill="#7C2D12">  - 对当前 gbest 运行破坏重建退火；若挖出更优解，直接覆盖替换</text>
+<text x="24" y="69.0" class="box-body" fill="#7C2D12" opacity="0.9">    种群中最差粒子 (worst_fitness)，强力拉升全群进化重心；解入缓冲</text>
+<text x="12" y="84.5" class="box-body" fill="#7C2D12" font-weight="700">• 停滞检测与多样性重初始化:</text>
+<text x="18" y="100.0" class="box-body" fill="#7C2D12">  - 连续 10 代无全局最优改进 → 触发停滞响应</text>
+<text x="18" y="115.5" class="box-body" fill="#7C2D12">  - 保护 gbest，淘汰最差 20% 粒子: 50% 从档案库注入精英，</text>
+<text x="24" y="131.0" class="box-body" fill="#7C2D12" opacity="0.9">    50% 纯随机重启，兼顾深度利用与广度探索</text>
+</g>
+<polygon points="815.5,1021 940.5,1045 815.5,1069 690.5,1045" fill="#FDEDEC" stroke="#E74C3C" stroke-width="1.4" filter="url(#shadow)"/>
+<text x="815.5" y="1041.5" text-anchor="middle" class="box-title" font-size="11.5" fill="#78281F">代数 gen + 1 &lt; max_gen ?</text>
+<text x="815.5" y="1058" text-anchor="middle" class="box-body" font-size="10" fill="#78281F" opacity="0.9">默认迭代 60 代</text>
+<g transform="translate(562, 1095)">
+<rect width="507" height="125" rx="7" fill="#FDF2E4" stroke="#E67A1E" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="58" height="17" rx="3.5" fill="#E67A1E" fill-opacity="0.15"/>
+<text x="37" y="19" text-anchor="middle" class="sec-tag" fill="#E67A1E">2.6 采样</text>
+<text x="74" y="20" class="box-title" fill="#7C2D12">最终 IG 两阶段深度强化与多模态采样 (iterated_greedy.py)</text>
+<text x="12" y="38" class="box-body" fill="#7C2D12" font-weight="700">• 以 PSO 的 gbest 为起点执行最终 IG 强化优化 (Ruiz 初始温度)</text>
+<text x="12" y="53.5" class="box-body" fill="#7C2D12" font-weight="700">• 破坏 (Destruction: 随机抽离 30% 工件) + 重建 (贪心最优插入放回)</text>
+<text x="12" y="69.0" class="box-body" fill="#7C2D12" font-weight="700">• 模拟退火接受准则: 劣解以 exp(-Δ/T) 概率接受跳出极值陷阱</text>
+<text x="12" y="84.5" class="box-body" fill="#7C2D12" font-weight="700">• 多模态并发采样 find_multimodal_solutions: 扰动+IG 采 5 条候选解</text>
+<text x="12" y="100.0" class="box-body" fill="#7C2D12" font-weight="700">• 产出最终精修解与局域多模态解，直接注入主求解器档案中枢</text>
+</g>
+<line x1="815.5" y1="350" x2="815.5" y2="375" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="815.5" y1="510" x2="815.5" y2="535" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="815.5" y1="675" x2="815.5" y2="700" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="815.5" y1="825" x2="815.5" y2="850" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="815.5" y1="1000" x2="815.5" y2="1021" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <path d="M 690.5 1045 L 554 1045 L 554 440 L 562 440" fill="none" stroke="#3A82E4" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+    <text x="562" y="1037" class="lbl-branch" fill="#3A82E4">是: 下一代</text>
+    
+<line x1="815.5" y1="1069" x2="815.5" y2="1095" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="823.5" y="1063" class="lbl-branch">否: 结束</text>
+
+    <path d="M 506 737 L 538 737 L 538 270 L 562 270" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+    <text x="493" y="262" class="lbl-branch">基线注入</text>
+    
+<g transform="translate(1125, 190)">
+<rect width="447" height="130" rx="7" fill="#EBF3FC" stroke="#3A82E4" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="58" height="17" rx="3.5" fill="#3A82E4" fill-opacity="0.15"/>
+<text x="37" y="19" text-anchor="middle" class="sec-tag" fill="#3A82E4">3.1 分派</text>
+<text x="74" y="20" class="box-title" fill="#1A365D">主求解器调度中枢 (solve_environment)</text>
+<text x="12" y="38" class="box-body" fill="#1A365D" font-weight="700">• 统一参数管理 SolverConfig: 种群、代数、公差等</text>
+<text x="12" y="53.5" class="box-body" fill="#1A365D" font-weight="700">• 先行计算 NEH / SPT 两大基线备用</text>
+<text x="12" y="69.0" class="box-body" fill="#1A365D" font-weight="700">• 核心模式分派分流 (mode 参数):</text>
+<text x="18" y="84.5" class="box-body" fill="#1A365D">  - basic_pso_ig: 经典两阶段混合求解</text>
+<text x="18" y="100.0" class="box-body" fill="#1A365D">  - multi_agent: 四智能体协同协同求解</text>
+<text x="18" y="115.5" class="box-body" fill="#1A365D">  - compare: 双模式对照择优求解</text>
+</g>
+<g transform="translate(1125, 345)">
+<rect width="447" height="155" rx="7" fill="#EBF3FC" stroke="#3A82E4" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="74" height="17" rx="3.5" fill="#3A82E4" fill-opacity="0.15"/>
+<text x="45" y="19" text-anchor="middle" class="sec-tag" fill="#3A82E4">3.2 基础模式</text>
+<text x="90" y="20" class="box-title" fill="#1A365D">模式一 · 经典两阶段 basic_pso_ig (推荐主线)</text>
+<text x="12" y="38" class="box-body" fill="#1A365D" font-weight="700">• 架构流水线: NEH/SPT → Niching PSO → IG 最终强化 → 档案引导</text>
+<text x="12" y="53.5" class="box-body" fill="#1A365D" font-weight="700">• 优势: 阶段边界清晰、搜索力度强劲、多模态解集丰富</text>
+<text x="12" y="69.0" class="box-body" fill="#1A365D" font-weight="700">• 候选汇聚: 将 PSO 缓冲池 200 解 + IG 精修解 + 多模态采样解</text>
+<text x="24" y="84.5" class="box-body" fill="#1A365D" opacity="0.9">  一次性统一送入 _build_archive 构建初始档案库</text>
+<text x="12" y="100.0" class="box-body" fill="#1A365D" font-weight="700">• 可选衔接: 触发档案库引导搜索与 PSO Elite Restart 闭环</text>
+</g>
+<g transform="translate(1125, 525)">
+<rect width="447" height="310" rx="7" fill="#FDF2E4" stroke="#E67A1E" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="74" height="17" rx="3.5" fill="#E67A1E" fill-opacity="0.15"/>
+<text x="45" y="19" text-anchor="middle" class="sec-tag" fill="#E67A1E">3.3 多智能体</text>
+<text x="90" y="20" class="box-title" fill="#7C2D12">模式二 · 四智能体协同 multi_agent (专业分工)</text>
+<text x="12" y="38" class="box-body" fill="#7C2D12" font-weight="700">• 四类异构搜索智能体协同运作:</text>
+<text x="24" y="53.5" class="box-body" fill="#7C2D12" opacity="0.9">  1. Seed Agent (种子智能体):</text>
+<text x="24" y="69.0" class="box-body" fill="#7C2D12" opacity="0.9">     - NEH / SPT 策略快速构建高质量起点</text>
+<text x="24" y="84.5" class="box-body" fill="#7C2D12" opacity="0.9">  2. Local Refiner Agent (局部精修智能体):</text>
+<text x="24" y="100.0" class="box-body" fill="#7C2D12" opacity="0.9">     - 基于 Ruiz 温度的 IG 针对性攻坚强化</text>
+<text x="24" y="115.5" class="box-body" fill="#7C2D12" opacity="0.9">  3. Exploration Agent (扩展探索智能体):</text>
+<text x="24" y="131.0" class="box-body" fill="#7C2D12" opacity="0.9">     - 高变异率 (1.8x) 短跑 PSO 大面积勘探解空间</text>
+<text x="24" y="146.5" class="box-body" fill="#7C2D12" opacity="0.9">  4. Intensification Agent (重点强化智能体):</text>
+<text x="24" y="162.0" class="box-body" fill="#7C2D12" opacity="0.9">     - 小步距集中算力深度 PSO+IG 强化深井</text>
+<text x="12" y="177.5" class="box-body" fill="#7C2D12" font-weight="700">• 协同枢纽机制 (Coordinator Archive):</text>
+<text x="18" y="193.0" class="box-body" fill="#7C2D12">  - 各智能体统一向共享 MultimodalArchive 提交候选</text>
+<text x="18" y="208.5" class="box-body" fill="#7C2D12">  - 动态统计各 Agent 提报解数、贡献度与胜出率</text>
+<text x="18" y="224.0" class="box-body" fill="#7C2D12">  - 记录详细协同报告 agent_reports 用于学术机制分析</text>
+</g>
+<g transform="translate(1125, 860)">
+<rect width="447" height="180" rx="7" fill="#F5EEF8" stroke="#9C56B8" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="74" height="17" rx="3.5" fill="#9C56B8" fill-opacity="0.15"/>
+<text x="45" y="19" text-anchor="middle" class="sec-tag" fill="#9C56B8">3.4 对照模式</text>
+<text x="90" y="20" class="box-title" fill="#4A154B">模式三 · 对照竞争决策 compare (消融首选)</text>
+<text x="12" y="38" class="box-body" fill="#4A154B" font-weight="700">• 并行独立执行 basic_pso_ig 与 multi_agent 求解</text>
+<text x="12" y="53.5" class="box-body" fill="#4A154B" font-weight="700">• 自动生成综合对比字典 comparison:</text>
+<text x="18" y="69.0" class="box-body" fill="#4A154B">  - 完工期对比 (best_makespan 对比)</text>
+<text x="18" y="84.5" class="box-body" fill="#4A154B">  - 求解耗时对比 (elapsed_seconds 对比)</text>
+<text x="18" y="100.0" class="box-body" fill="#4A154B">  - 档案库规模对比 (archive_size 对比)</text>
+<text x="12" y="115.5" class="box-body" fill="#4A154B" font-weight="700">• 胜出者裁定: 完工期更小者胜出; 平手时取耗时更短者</text>
+<text x="12" y="131.0" class="box-body" fill="#4A154B" font-weight="700">• 专为论文消融实验、算法优劣对比定制的决策出口</text>
+</g>
+<g transform="translate(1125, 1065)">
+<rect width="447" height="155" rx="7" fill="#E6FFFA" stroke="#0D9488" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="58" height="17" rx="3.5" fill="#0D9488" fill-opacity="0.15"/>
+<text x="37" y="19" text-anchor="middle" class="sec-tag" fill="#0D9488">3.5 汇聚</text>
+<text x="74" y="20" class="box-title" fill="#115E59">候选解池全量汇聚 (_build_archive)</text>
+<text x="12" y="38" class="box-body" fill="#115E59" font-weight="700">• 汇集来源:</text>
+<text x="24" y="53.5" class="box-body" fill="#115E59" opacity="0.9">  ① PSO 产生的 200 个高质量候选解缓冲</text>
+<text x="24" y="69.0" class="box-body" fill="#115E59" opacity="0.9">  ② IG 局部深度精修产出的全局最优解</text>
+<text x="24" y="84.5" class="box-body" fill="#115E59" opacity="0.9">  ③ IG 多模态扰动采样的 5 条近优局部解</text>
+<text x="12" y="100.0" class="box-body" fill="#115E59" font-weight="700">• 一并输入第四栏多模态档案库进行四步严格质检</text>
+</g>
+<line x1="1348.5" y1="320" x2="1348.5" y2="345" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="1348.5" y1="500" x2="1348.5" y2="525" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="1348.5" y1="835" x2="1348.5" y2="860" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="1348.5" y1="1040" x2="1348.5" y2="1065" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <path d="M 1069 1150 L 1101 1150 L 1101 420 L 1125 420" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <text x="1056" y="412" class="lbl-branch">候选解流转</text>
+    
+<g transform="translate(1628, 190)">
+<rect width="473" height="290" rx="7" fill="#F5EEF8" stroke="#9C56B8" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="74" height="17" rx="3.5" fill="#9C56B8" fill-opacity="0.15"/>
+<text x="45" y="19" text-anchor="middle" class="sec-tag" fill="#9C56B8">4.1 档案准入</text>
+<text x="90" y="20" class="box-title" fill="#4A154B">多模态档案库严格四步准入机制 (MultimodalArchive)</text>
+<text x="12" y="38" class="box-body" fill="#4A154B" font-weight="700">• 核心宗旨: 存调度不存排列，每个结构等价类只留唯一代表元</text>
+<text x="12" y="53.5" class="box-body" fill="#4A154B"></text>
+<text x="12" y="69.0" class="box-body" fill="#4A154B">【步骤 ① 质量门限筛选 (Quality Cutoff)】</text>
+<text x="24" y="84.5" class="box-body" fill="#4A154B" opacity="0.9">  判断 makespan ≤ (1 + ρ) · best (默认 ρ = 1%)，超标即拒收</text>
+<text x="12" y="100.0" class="box-body" fill="#4A154B"></text>
+<text x="12" y="115.5" class="box-body" fill="#4A154B">【步骤 ② 结构签名等价类去重 (Equivalence Deduplication)】</text>
+<text x="24" y="131.0" class="box-body" fill="#4A154B" opacity="0.9">  计算结构签名 Sig(π)；若签名相同，仅在候选更优时原地替换，</text>
+<text x="24" y="146.5" class="box-body" fill="#4A154B" opacity="0.9">  否则视作同调度冗余拒绝 (rejected_same_class)</text>
+<text x="12" y="162.0" class="box-body" fill="#4A154B"></text>
+<text x="12" y="177.5" class="box-body" fill="#4A154B">【步骤 ③ 析取式三维新颖性判定 (Disjunctive Novelty)】</text>
+<text x="24" y="193.0" class="box-body" fill="#4A154B" opacity="0.9">  二分窗口比对相近解: 仅当「质量相近 且 D_m ≤ 0.05</text>
+<text x="24" y="208.5" class="box-body" fill="#4A154B" opacity="0.9">  且 D_s ≤ 0.10」同时满足时才拒收；有一项新颖即接纳入档</text>
+<text x="12" y="224.0" class="box-body" fill="#4A154B"></text>
+<text x="12" y="239.5" class="box-body" fill="#4A154B">【步骤 ④ 质量动态剪枝与最远点优先容量裁剪】</text>
+<text x="18" y="255.0" class="box-body" fill="#4A154B">  - 剪枝: 最优刷新后，自动剔除超出新门限的陈旧解</text>
+<text x="18" y="270.5" class="box-body" fill="#4A154B">  - 裁剪: 超过容量(200)时，按最远点优先法则贪心挑选最分散子集</text>
+</g>
+<polygon points="1864.5,490 1984.5,510 1864.5,530 1744.5,510" fill="#FDEDEC" stroke="#E74C3C" stroke-width="1.4" filter="url(#shadow)"/>
+<text x="1864.5" y="506.5" text-anchor="middle" class="box-title" font-size="11.5" fill="#78281F">启用档案引导？</text>
+<text x="1864.5" y="523" text-anchor="middle" class="box-body" font-size="10" fill="#78281F" opacity="0.9">archive_guided_rounds &gt; 0</text>
+<g transform="translate(1628, 550)">
+<rect width="473" height="95" rx="7" fill="#F5EEF8" stroke="#9C56B8" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="74" height="17" rx="3.5" fill="#9C56B8" fill-opacity="0.15"/>
+<text x="45" y="19" text-anchor="middle" class="sec-tag" fill="#9C56B8">4.2 重启闭环</text>
+<text x="90" y="20" class="box-title" fill="#4A154B">档案引导闭环 Ⅰ · 精英注入重启 PSO</text>
+<text x="12" y="38" class="box-body" fill="#4A154B" font-weight="700">• 将档案库等优排列整体赋给 pso.diversity_pool</text>
+<text x="12" y="53.5" class="box-body" fill="#4A154B" font-weight="700">• 重置停滞计数，执行 archive_pso_restart_generations 代短跑</text>
+<text x="12" y="69.0" class="box-body" fill="#4A154B" font-weight="700">• 初始建群与停滞时高比例注入精英种子，产出新解全量冲刷档案库</text>
+<text x="12" y="84.5" class="box-body" fill="#4A154B" font-weight="700">• 形成由高质量多模态解集反向赋能全局探索的强力闭环</text>
+</g>
+<g transform="translate(1628, 665)">
+<rect width="473" height="160" rx="7" fill="#FDF2E4" stroke="#E67A1E" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="74" height="17" rx="3.5" fill="#E67A1E" fill-opacity="0.15"/>
+<text x="45" y="19" text-anchor="middle" class="sec-tag" fill="#E67A1E">4.3 引导游走</text>
+<text x="90" y="20" class="box-title" fill="#7C2D12">档案引导闭环 Ⅱ · 定向多样化游走 (AGS)</text>
+<text x="12" y="38" class="box-body" fill="#7C2D12" font-weight="700">• 轮次交替种子选择 (Alternating Seed Strategy):</text>
+<text x="18" y="53.5" class="box-body" fill="#7C2D12">  - 偶数轮(强化 Intensify): 从等优解集中随机挑，小扰动 15%</text>
+<text x="18" y="69.0" class="box-body" fill="#7C2D12">  - 奇数轮(探索 Explore): 挑最孤立解 argmax(Crowding)，大扰动 35%</text>
+<text x="12" y="84.5" class="box-body" fill="#7C2D12" font-weight="700">• 多样化游走与新颖性接受准则 (Diversity Acceptance Walk):</text>
+<text x="18" y="100.0" class="box-body" fill="#7C2D12">  - 种子扰动后执行 IG 重优化</text>
+<text x="18" y="115.5" class="box-body" fill="#7C2D12">  - 核心突破: makespan 更好 或 (不同等价类 且 离起点更远) 均接受，</text>
+<text x="24" y="131.0" class="box-body" fill="#7C2D12" opacity="0.9">    允许在等优平原横向平移而不塌陷；每个候选调用 add_solution 入档</text>
+</g>
+<polygon points="1864.5,835 1989.5,855 1864.5,875 1739.5,855" fill="#FDEDEC" stroke="#E74C3C" stroke-width="1.4" filter="url(#shadow)"/>
+<text x="1864.5" y="851.5" text-anchor="middle" class="box-title" font-size="11.5" fill="#78281F">未停滞且未达最大轮数？</text>
+<text x="1864.5" y="868" text-anchor="middle" class="box-body" font-size="10" fill="#78281F" opacity="0.9">stagnation &lt; 15 且 rounds &lt; Max</text>
+<g transform="translate(1628, 895)">
+<rect width="473" height="75" rx="7" fill="#EAF7EE" stroke="#27AE60" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="74" height="17" rx="3.5" fill="#27AE60" fill-opacity="0.15"/>
+<text x="45" y="19" text-anchor="middle" class="sec-tag" fill="#27AE60">4.4 最终更新</text>
+<text x="90" y="20" class="box-title" fill="#145A32">比较档案库首解，更优则更新最终 best</text>
+<text x="12" y="38" class="box-body" fill="#145A32" font-weight="700">• 若引导搜索挖掘出比原先全局最优更低的 makespan，</text>
+<text x="24" y="53.5" class="box-body" fill="#145A32" opacity="0.9">  将档案库第 1 名刷新为最终全局最优解 best_evaluation</text>
+<text x="12" y="69.0" class="box-body" fill="#145A32" font-weight="700">• 实现档案库不仅存解、更反哺单解最优的双重价值</text>
+</g>
+<g transform="translate(1628, 990)">
+<rect width="473" height="105" rx="7" fill="#E6FFFA" stroke="#0D9488" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="74" height="17" rx="3.5" fill="#0D9488" fill-opacity="0.15"/>
+<text x="45" y="19" text-anchor="middle" class="sec-tag" fill="#0D9488">4.5 数据补全</text>
+<text x="90" y="20" class="box-title" fill="#115E59">工序明细数据补充 (_enrich_with_schedule_data)</text>
+<text x="12" y="38" class="box-body" fill="#115E59" font-weight="700">• 遍历档案库所有保留解，调用统一解码器补充:</text>
+<text x="18" y="53.5" class="box-body" fill="#115E59">  - completion_times: 每个工件的最终完工时刻</text>
+<text x="18" y="69.0" class="box-body" fill="#115E59">  - operations: 每道工序的 (开始时刻, 完工时刻, 机器号)</text>
+<text x="12" y="84.5" class="box-body" fill="#115E59" font-weight="700">• 保证档案库保存的 JSON 解集可直接用于甘特图渲染</text>
+</g>
+<g transform="translate(1628, 1115)">
+<rect width="473" height="105" rx="7" fill="#EAF7EE" stroke="#27AE60" stroke-width="1.3" filter="url(#shadow)"/>
+<rect x="8" y="7" width="74" height="17" rx="3.5" fill="#27AE60" fill-opacity="0.15"/>
+<text x="45" y="19" text-anchor="middle" class="sec-tag" fill="#27AE60">4.6 最终交付</text>
+<text x="90" y="20" class="box-title" fill="#145A32">算法终止 · 交付最终最优解与多模态解集</text>
+<text x="12" y="38" class="box-body" fill="#145A32" font-weight="700">• 最终标准化结果组装与交付 (_build_solver_result):</text>
+<text x="18" y="53.5" class="box-body" fill="#145A32">  - best_solution: 全局最优调度方案 (完工期最小与详细分配)</text>
+<text x="18" y="69.0" class="box-body" fill="#145A32">  - archive: 结构互异的高质量多模态等优解集 (N_ρ 等优调度)</text>
+<text x="18" y="84.5" class="box-body" fill="#145A32">  - baselines: NEH / SPT 对照值与加速比</text>
+<text x="12" y="100.0" class="box-body" fill="#145A32" font-weight="700">• 导出格式: multimodal_archive.json 与 summary.json</text>
+</g>
+<line x1="1864.5" y1="480" x2="1864.5" y2="490" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="1864.5" y1="530" x2="1864.5" y2="550" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="1872.5" y="526" class="lbl-branch">是</text>
+<line x1="1864.5" y1="645" x2="1864.5" y2="665" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="1864.5" y1="825" x2="1864.5" y2="835" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <path d="M 1739.5 855 L 1620 855 L 1620 715 L 1628 715" fill="none" stroke="#E67A1E" stroke-width="1.4" marker-end="url(#arrow-orange)"/>
+    <text x="1626" y="849" class="lbl-branch" fill="#E67A1E">是: 继续开采</text>
+    
+<line x1="1864.5" y1="875" x2="1864.5" y2="895" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="1872.5" y="871" class="lbl-branch">否: 结束</text>
+<line x1="1864.5" y1="970" x2="1864.5" y2="990" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="1864.5" y1="1095" x2="1864.5" y2="1115" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <path d="M 1984.5 510 L 2107 510 L 2107 1040 L 2101 1040" fill="none" stroke="#475569" stroke-width="1.4" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+    <text x="2072" y="504" class="lbl-branch">否: 跳过引导</text>
+    
+
+    <path d="M 1572 1130 L 1604 1130 L 1604 245 L 1628 245" fill="none" stroke="#9C56B8" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
+    <text x="1559" y="237" class="lbl-branch">候选入档</text>
+    
+
+    <g transform="translate(45, 1410)">
+        <!-- 常规计算 -->
+        <rect x="0" y="0" width="22" height="15" rx="3" fill="#EBF3FC" stroke="#3A82E4" stroke-width="1.2"/>
+        <text x="30" y="12" class="box-body" fill="#334155">L0/L2 常规计算与解码</text>
+
+        <!-- 启发式 / 局部搜索 -->
+        <rect x="210" y="0" width="22" height="15" rx="3" fill="#FDF2E4" stroke="#E67A1E" stroke-width="1.2"/>
+        <text x="240" y="12" class="box-body" fill="#334155">L1 启发式与 IG 局部深挖</text>
+
+        <!-- 档案操作 -->
+        <rect x="440" y="0" width="22" height="15" rx="3" fill="#F5EEF8" stroke="#9C56B8" stroke-width="1.2"/>
+        <text x="470" y="12" class="box-body" fill="#334155">L3 多模态档案准入与引导</text>
+
+        <!-- 协同与调度 -->
+        <rect x="680" y="0" width="22" height="15" rx="3" fill="#E6FFFA" stroke="#0D9488" stroke-width="1.2"/>
+        <text x="710" y="12" class="box-body" fill="#334155">L0 商集理论 / L3 模式分派</text>
+
+        <!-- 判断节点 -->
+        <polygon points="930,0 945,7.5 930,15 915,7.5" fill="#FDEDEC" stroke="#E74C3C" stroke-width="1.2"/>
+        <text x="955" y="12" class="box-body" fill="#334155">判定与分支</text>
+
+        <!-- 结果输出 -->
+        <rect x="1080" y="0" width="22" height="15" rx="3" fill="#EAF7EE" stroke="#27AE60" stroke-width="1.2"/>
+        <text x="1110" y="12" class="box-body" fill="#334155">最终结果组装与交付</text>
+
+        <text x="1450" y="12" class="box-body" fill="#64748B" font-weight="700">HFSP 核心求解算法体系 · 四大支柱 · 端到端严格数学映射流程图</text>
+    </g>
+    
+</svg>

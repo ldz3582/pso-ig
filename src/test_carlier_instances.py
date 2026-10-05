@@ -9,10 +9,16 @@ from multimodal_hfsp_solver import SolverConfig, run_multimodal_hfsp
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="运行单个 HFSP 算例")
+    default_benchmark = (
+        Path(__file__).resolve().parent.parent
+        / "5benchmark"
+        / "Carlier_benchmark"
+        / "j10c5a2.txt"
+    )
     parser.add_argument(
         "--benchmark",
-        default=str(Path("benchmarks") / "benchmark_carlier_small.json"),
-        help="benchmark JSON 路径",
+        default=str(default_benchmark),
+        help="benchmark 算例路径（默认: 5benchmark/Carlier_benchmark/j10c5a2.txt）",
     )
     parser.add_argument("--output-dir", default="output")
     parser.add_argument("--results-dir", default="results")

@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import time
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
@@ -194,7 +194,7 @@ def _enrich_archive_with_schedule_data(
         evaluation = env.decode_and_evaluate(solution["permutation"])
         solution["machine_assignments"] = [list(row) for row in evaluation.machine_assignments]
         solution["completion_times"] = list(evaluation.completion_times)
-        solution["operations"] = evaluation.operations
+        solution["operations"] = [asdict(operation) for operation in evaluation.operations]
 
 
 def _run_basic_pso_ig(
@@ -551,8 +551,18 @@ def run_multimodal_hfsp(
 
 
 def _build_parser() -> argparse.ArgumentParser:
+    default_benchmark = (
+        Path(__file__).resolve().parent.parent
+        / "5benchmark"
+        / "Carlier_benchmark"
+        / "j10c5a2.txt"
+    )
     parser = argparse.ArgumentParser(description="HFSP 多模态求解器")
-    parser.add_argument("--benchmark", required=True, help="基准文件路径")
+    parser.add_argument(
+        "--benchmark",
+        default=str(default_benchmark),
+        help="基准文件路径（支持 .txt 和 .json，默认使用 Carlier 典型算例）",
+    )
     parser.add_argument("--output-dir", default="output", help="输出目录")
     parser.add_argument("--results-dir", default="results", help="图表目录")
     parser.add_argument("--population-size", type=int, default=40)

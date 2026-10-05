@@ -1,0 +1,41 @@
+{
+  "benchmark": "j10c5a2.txt",
+  "instance_name": "j10c5a2",
+  "best_makespan": 88,
+  "best_permutation": [
+    0,
+    3,
+    4,
+    5,
+    2,
+    8,
+    6,
+    9,
+    1,
+    7
+  ],
+  "archive_size": 205,
+  "archive_path": "output/multimodal_archive_j10c5a2.json",
+  "gantt_chart_path": null,
+  "elapsed_seconds": 1.7099,
+  "config": {
+    "population_size": 30,
+    "max_generations": 40,
+    "w_max": 0.9,
+    "w_min": 0.4,
+    "c1": 1.5,
+    "c2": 1.5,
+    "k_neighbors": 3,
+    "stagnation_threshold": 10,
+    "mutation_probability": 0.12,
+    "niche_distance_threshold": 3,
+    "destruction_ratio": 0.3,
+    "ig_max_iterations": 15,
+    "cooling_rate": 0.95,
+    "makespan_tolerance": 0.01,
+    "permutation_distance_threshold": 3,
+    "machine_assignment_threshold": 1,
+    "seed": 20260326
+  },
+  "summary_path": "output/j10c5a2_summary.json"
+}

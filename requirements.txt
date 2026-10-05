@@ -1,4 +1,5 @@
-fastapi==0.115.12
-uvicorn==0.34.0
-pydantic==2.11.3
+# 核心算法依赖
+numpy==2.5.0
+
+# 甘特图导出（仅 --generate-chart 需要）
 matplotlib==3.10.1
