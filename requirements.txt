@@ -1,5 +1,2 @@
-# 核心算法依赖
-numpy==2.5.0
-
-# 甘特图导出（仅 --generate-chart 需要）
-matplotlib==3.10.1
+# 甘特图导出（多模态解识别）
+matplotlib>=3.8
